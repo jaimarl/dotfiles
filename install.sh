@@ -6,6 +6,7 @@ if [ "$#" -eq 0 ]; then
     echo "Доступные конфиги:"
     echo " [nvim]      -  Neovim"
     echo " [pipewire]  -  Pipewire mono playback"
+    echo " [tmux]      -  Tmux"
     echo " [yazi]      -  Yazi"
     exit 0
 fi
@@ -15,7 +16,7 @@ for config in "$@"; do
         nvim)
             echo "--- Установка Neovim ---"
 
-            sudo pacman -S --needed luarocks
+            sudo pacman -S --needed neovim luarocks
 
             rm -rf ~/.config/nvim
             ln -sf "$DIRNAME"/nvim ~/.config
@@ -26,10 +27,18 @@ for config in "$@"; do
             mkdir -p ~/.config/pipewire/pipewire.conf.d
             ln -sf "$DIRNAME"/pipewire/pipewire.conf.d/mono-playback.conf ~/.config/pipewire/pipewire.conf.d
         ;;
+        tmux)
+            echo "--- Установка Tmux ---"
+
+            sudo pacman -S --needed tmux
+            
+            rm -rf ~/.config/tmux
+            ln -sf "$DIRNAME"/tmux ~/.config
+        ;;
         yazi)
             echo "--- Установка Yazi ---"
 
-            sudo pacman -S --needed 7zip mediainfo trash-cli wl-clipboard
+            sudo pacman -S --needed yazi 7zip mediainfo trash-cli wl-clipboard
 
             rm -rf ~/.config/yazi
             ln -sf "$DIRNAME"/yazi ~/.config
