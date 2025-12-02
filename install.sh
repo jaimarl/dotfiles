@@ -7,7 +7,6 @@ if [ "$#" -eq 0 ]; then
     echo " [nvim]      -  Neovim"
     echo " [pipewire]  -  Pipewire mono playback"
     echo " [yazi]      -  Yazi"
-
     exit 0
 fi
 
