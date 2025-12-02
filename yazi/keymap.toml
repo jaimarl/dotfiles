@@ -1,0 +1,52 @@
+[mgr]
+prepend_keymap = [
+    # Sorting
+    { on = [ ",", "a" ], run = "sort alphabetical --reverse=no",                desc = " Alphabetically " },
+	{ on = [ ",", "b" ], run = [ "sort btime --reverse=no", "linemode btime" ], desc = " Birth time " },
+	{ on = [ ",", "e" ], run = "sort extension --reverse=no",                   desc = " Extension " },
+	{ on = [ ",", "A" ], run = "sort alphabetical --reverse",                   desc = " Alphabetically " },
+	{ on = [ ",", "B" ], run = [ "sort btime --reverse", "linemode btime" ],    desc = " Birth time " },
+	{ on = [ ",", "E" ], run = "sort extension --reverse",                      desc = " Extension " },
+	{ on = [ ",", "s" ], run = [ "sort size --reverse=no", "linemode size" ],   desc = " Size " },
+	{ on = [ ",", "m" ], run = [ "sort mtime --reverse=no", "linemode mtime" ], desc = " Modified time " },
+	{ on = [ ",", "n" ], run = "sort natural --reverse=no",                     desc = " Naturally " },
+	{ on = [ ",", "S" ], run = [ "sort size --reverse", "linemode size" ],      desc = " Size " },
+	{ on = [ ",", "M" ], run = [ "sort mtime --reverse", "linemode mtime" ],    desc = " Modified time " },
+	{ on = [ ",", "N" ], run = "sort natural --reverse",                        desc = " Naturally " },
+	{ on = [ ",", "r" ], run = "noop" },
+
+    # Information
+	{ on = [ "m", "s" ], run = "linemode size",        desc = "󰌕 Size" },
+	{ on = [ "m", "m" ], run = "linemode mtime",       desc = "󰌕 Modified time" },
+	{ on = [ "m", "o" ], run = "linemode owner",       desc = "󰌕 Owner" },
+	{ on = [ "m", "p" ], run = "linemode permissions", desc = "󰌕 Extension" },
+	{ on = [ "m", "b" ], run = "linemode btime",       desc = "󰌕 Birth time" },
+	{ on = [ "m", "n" ], run = "linemode none",        desc = "󰌕 Nothing" },
+
+    # Copy
+	{ on = [ "c", "c" ], run = "copy path",             desc = " File path" },
+	{ on = [ "c", "d" ], run = "copy dirname",          desc = " Directory path" },
+	{ on = [ "c", "f" ], run = "copy filename",         desc = " Filename" },
+	{ on = [ "c", "s" ], run = "plugin wl-clipboard",   desc = " Clipboard" },
+	{ on = [ "c", "t" ], run = "plugin copy-file-contents",   desc = " Contents" },
+	{ on = [ "c", "n" ], run = "noop" },
+
+    # Goto
+    { on = [ "g", "h" ],       run = "cd ~",             desc = " /home" },
+	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = " ~/.config" },
+	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = " ~/Downloads" },
+	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = " Jump interactively" },
+	{ on = [ "g", "f" ],       run = "follow",           desc = " Follow symlink" },
+    { on = [ "g", "g" ], run = "arrow top", desc = " Go to top" },
+	{ on = "G",          run = "arrow bot", desc = " Go to bottom" },
+
+    # Trash
+    { on = ["R","o"], run = "plugin recycle-bin -- open",        desc = " Open trash" },
+    { on = ["R","d"], run = "plugin recycle-bin -- delete",      desc = " Delete" },
+    { on = ["R","D"], run = "plugin recycle-bin -- emptyDays",   desc = " Delete after..." },
+    { on = ["R","e"], run = "plugin recycle-bin -- empty",       desc = "󰧧 Empty trash" },
+    { on = ["R","r"], run = "plugin recycle-bin -- restore",     desc = " Restore" },
+
+    # Archive
+    { on = ["C"], run = "plugin compress" }
+]
