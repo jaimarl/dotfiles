@@ -20,12 +20,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
     spec = {
         { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+        { "folke/snacks.nvim", priority = 1000, lazy = false},
         
         { 'cohama/lexima.vim' },
         { 'norcalli/nvim-colorizer.lua' },
         { 'numToStr/Comment.nvim' },
         { 'akinsho/bufferline.nvim' },
-        { 'saghen/blink.indent' },
 
         {
             'nvim-telescope/telescope.nvim',
@@ -40,13 +40,11 @@ require("lazy").setup({
             dependencies = { 'folke/snacks.nvim' },
         },
         {
-            "mikavilpas/yazi.nvim",
-            event = "VeryLazy",
+            "mikavilpas/yazi.nvim", event = "VeryLazy",
             dependencies = { "nvim-lua/plenary.nvim", lazy = true },
         },
         {
-            'nvimdev/dashboard-nvim',
-            event = 'VimEnter',
+            'nvimdev/dashboard-nvim', event = 'VimEnter',
             dependencies = { {'nvim-tree/nvim-web-devicons'}}
         },
     },

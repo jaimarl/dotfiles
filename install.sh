@@ -16,7 +16,7 @@ for config in "$@"; do
         nvim)
             echo "--- Установка Neovim ---"
 
-            sudo pacman -S --needed neovim luarocks
+            sudo pacman -S --noconfirm --needed neovim luarocks
 
             rm -rf ~/.config/nvim
             ln -sf "$DIRNAME"/nvim ~/.config
@@ -30,7 +30,7 @@ for config in "$@"; do
         tmux)
             echo "--- Установка Tmux ---"
 
-            sudo pacman -S --needed tmux
+            sudo pacman -S --noconfirm--needed tmux
             
             rm -rf ~/.config/tmux
             ln -sf "$DIRNAME"/tmux ~/.config
@@ -38,7 +38,7 @@ for config in "$@"; do
         yazi)
             echo "--- Установка Yazi ---"
 
-            sudo pacman -S --needed yazi 7zip mediainfo trash-cli wl-clipboard
+            sudo pacman -S --noconfirm --needed yazi 7zip mediainfo trash-cli wl-clipboard
 
             rm -rf ~/.config/yazi
             ln -sf "$DIRNAME"/yazi ~/.config
