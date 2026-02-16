@@ -1,0 +1,41 @@
+format = """
+$status $os   $directory\
+$git_branch\
+$git_status\
+ $time $cmd_duration
+$character 
+"""
+
+[status]
+disabled = false
+format = "$symbol"
+success_symbol = "╭"
+symbol = "[╭](red)"
+
+[os]
+disabled = false
+
+[os.symbols]
+Arch = "[󰣇](blue)"
+Artix = "[](blue)"
+NixOS = "[](blue)"
+
+[directory]
+read_only = "  "
+truncation_symbol = ".../"
+
+[git_branch]
+symbol = " "
+
+[time]
+disabled = false
+format = "[$time](yellow)"
+time_format = "%H:%M"
+
+[cmd_duration]
+format = "\\(took [$duration](yellow)\\)"
+
+[character]
+format = "$symbol"
+success_symbol = "╰─"
+error_symbol = "[╰─](red)"

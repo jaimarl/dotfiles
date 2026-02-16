@@ -1,0 +1,27 @@
+[[plugin.deps]]
+use = "uhs-robert/recycle-bin"
+rev = "bce0eb1"
+hash = "fc696aa2ff140e8d8ee1f490ca787bb0"
+
+[[plugin.deps]]
+use = "boydaihungst/mediainfo"
+rev = "7543154"
+hash = "212fe977a845f44da073a397e0170e60"
+
+[[plugin.deps]]
+use = "KKV9/compress"
+rev = "c264639"
+hash = "e17c11b605d989568a1d1741ca17c584"
+
+[[plugin.deps]]
+use = "grappas/wl-clipboard"
+rev = "e9a38e4"
+hash = "6b8e5d6b09626facec713923d3ddb54b"
+
+[[plugin.deps]]
+use = "AnirudhG07/plugins-yazi:copy-file-contents"
+rev = "71545f4"
+hash = "f8530ee84fee95dbcc26bb1d8d8019c7"
+
+[flavor]
+deps = []
