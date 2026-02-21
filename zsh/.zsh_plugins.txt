@@ -9,4 +9,5 @@ ohmyzsh/ohmyzsh path:plugins/sudo
 zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-history-substring-search
+hlissner/zsh-autopair
 Aloxaf/fzf-tab

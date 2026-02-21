@@ -28,7 +28,7 @@ setopt SHARE_HISTORY
 # Replacements
 calias() { if (( ${+commands[${2%% *}]} )); then alias $1=$2; fi }
 calias cat "bat"
-calias ls "eza --icons=always"
+calias ls "eza -a --icons=always"
 
 # NeoVim
 alias n="nvim"
