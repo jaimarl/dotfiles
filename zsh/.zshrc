@@ -6,8 +6,18 @@ if [[ ! -d "$ANTIDOTE_DIR" ]]; then
     git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR"
 fi
 
-source "$ANTIDOTE_DIR/antidote.zsh"
-antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
+zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
+
+[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
+
+fpath=("$ANTIDOTE_DIR"/functions $fpath)
+autoload -Uz antidote
+
+if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+    antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+fi
+
+source ${zsh_plugins}.zsh
 
 
 #---[ Starship ]-----------------------------------------------------
@@ -45,10 +55,20 @@ alias zrephist="strings ~/.zsh_history > ~/.zsh_history"
 
 #---[ Binds ]--------------------------------------------------------
 bindkey "^H" backward-kill-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 
 #---[ Plugin Configuration ]-----------------------------------------
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+function magic-enter-cmd {
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        echo "ls; echo ''; git status -s"
+    else
+        echo "ls"
+    fi
+}
 
 
 #---[ Yazi ]---------------------------------------------------------
@@ -58,4 +78,48 @@ function y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
+}
+
+function extract() {
+    if [ -f "$1" ]; then
+        local dest="${2:-.}"
+        
+        if [[ ! -d "$dest" ]]; then
+            mkdir -p "$dest"
+        fi
+
+        case "$1" in
+            *.tar.bz2)   tar xjf "$1" -C "$dest"    ;;
+            *.tar.gz)    tar xzf "$1" -C "$dest"    ;;
+            *.tar.xz)    tar xf "$1" -C "$dest"     ;;
+            *.bz2)       bunzip2 "$1"               ;;
+            *.rar)       unrar x "$1" "$dest"       ;;
+            *.gz)        gunzip "$1"                ;;
+            *.tar)       tar xf "$1" -C "$dest"     ;;
+            *.tbz2)      tar xjf "$1" -C "$dest"    ;;
+            *.tgz)       tar xzf "$1" -C "$dest"    ;;
+            *.txz)       tar xf "$1" -C "$dest"     ;;
+            *.zip)       unzip "$1" -d "$dest"      ;;
+            *.Z)         uncompress "$1"            ;;
+            *.7z)        7z x "$1" -o"$dest"        ;;
+            *)           echo "Error: Unknown file type" ;;
+        esac
+    else
+        echo "Error: '$1' is not a file"
+    fi
+}
+
+function up() {
+    local d=""
+    local limit="$1"
+
+    if [[ ! "$limit" =~ ^[0-9]+$ ]]; then
+        limit=1
+    fi
+
+    for ((i=1; i <= limit; i++)); do
+        d="../$d"
+    done
+
+    cd "$d"
 }

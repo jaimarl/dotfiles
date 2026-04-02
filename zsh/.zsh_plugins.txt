@@ -1,13 +1,8 @@
-# Oh My Zsh Plugins
-getantidote/use-omz
-ohmyzsh/ohmyzsh path:lib
-ohmyzsh/ohmyzsh path:plugins/colored-man-pages
-ohmyzsh/ohmyzsh path:plugins/copypath
-ohmyzsh/ohmyzsh path:plugins/extract
 ohmyzsh/ohmyzsh path:plugins/sudo
-
-zsh-users/zsh-syntax-highlighting
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-history-substring-search
+zshzoo/magic-enter
 hlissner/zsh-autopair
 Aloxaf/fzf-tab
+joshskidmore/zsh-fzf-history-search
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
+
