@@ -61,7 +61,7 @@ case "$MODE" in
                 --prompt="Select wallpaper: " \
                 --delimiter="\t" \
                 --with-nth=1 \
-                --preview "chafa -s ${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES} {2}" \
+                --preview "chafa -s \${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES} {2}" \
                 --preview-window=right:60% \
                 --layout=reverse )
 
