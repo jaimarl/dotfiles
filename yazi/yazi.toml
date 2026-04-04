@@ -16,7 +16,7 @@ nvim_sudo = [
     { run = 'sudo -E -s nvim "$@"', desc = "Neovim (sudo)", block = true }
 ]
 wallpaper = [
-    { run = 'wp set "$0"', desc = "Set as wallpaper" }
+    { run = 'wp set %s1', desc = "Set as wallpaper" }
 ]
 
 
