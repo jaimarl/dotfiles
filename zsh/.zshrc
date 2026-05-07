@@ -6,18 +6,8 @@ if [[ ! -d "$ANTIDOTE_DIR" ]]; then
     git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_DIR"
 fi
 
-zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-
-[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
-
-fpath=("$ANTIDOTE_DIR"/functions $fpath)
-autoload -Uz antidote
-
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-    antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
-fi
-
-source ${zsh_plugins}.zsh
+source "$ANTIDOTE_DIR/antidote.zsh"
+antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 
 
 #---[ Starship ]-----------------------------------------------------
@@ -33,6 +23,9 @@ setopt HIST_IGNORE_DUPS
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
+autoload -U select-word-style
+select-word-style bash
+
 
 #---[ Aliases ]------------------------------------------------------
 # Replacements
@@ -40,7 +33,7 @@ calias() { if (( ${+commands[${2%% *}]} )); then alias $1=$2; fi }
 calias cat "bat"
 calias ls "eza -a --icons=always"
 
-# NeoVim
+# Neovim
 alias n="nvim"
 alias sn="sudo -Es nvim"
 
@@ -54,9 +47,13 @@ alias zrephist="strings ~/.zsh_history > ~/.zsh_history"
 
 
 #---[ Binds ]--------------------------------------------------------
+bindkey "^[[1;5D" backward-word
 bindkey "^H" backward-kill-word
 bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
+bindkey '^[[3;5~' kill-word
+
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
 
 
 #---[ Plugin Configuration ]-----------------------------------------
@@ -71,15 +68,7 @@ function magic-enter-cmd {
 }
 
 
-#---[ Yazi ]---------------------------------------------------------
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	command yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
-}
-
+#---[ Functions ]----------------------------------------------------
 function extract() {
     if [ -f "$1" ]; then
         local dest="${2:-.}"
@@ -122,4 +111,14 @@ function up() {
     done
 
     cd "$d"
+}
+
+
+#---[ Yazi ]---------------------------------------------------------
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
 }

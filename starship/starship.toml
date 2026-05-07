@@ -22,11 +22,11 @@ NixOS = "[](blue)"
 Fedora = "[󰣛](blue)"
 
 [directory]
-read_only = "  "
+read_only = " 󰌾"
 truncation_symbol = ".../"
 
 [git_branch]
-symbol = " "
+symbol = "󰘬 "
 
 [time]
 disabled = false
