@@ -42,7 +42,8 @@ alias ff="clear && fastfetch"
 alias ..="cd .."
 alias -g G="| grep"
 
-# Other
+# Zsh
+alias zreload="source ~/.zshrc && echo 'ZSH config reloaded!'"
 alias zrephist="strings ~/.zsh_history > ~/.zsh_history"
 
 
