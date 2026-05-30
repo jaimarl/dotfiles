@@ -1,0 +1,10 @@
+#---[ Local Settings ]---------------------------------------------------------------------
+# This file is intended for configuration specific to the CURRENT computer
+# It has been added to '.gitignore', so your changes will not be pushed to the repository
+#
+# This is a convenient place to store:
+#   - Secret keys and tokens (API keys, personal tokens)
+#   - Work / corporate aliases
+#   - Path settings (PATH) tied to specific hardware
+#------------------------------------------------------------------------------------------
+

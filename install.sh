@@ -46,9 +46,9 @@ for arg; do
             ;;
         zsh)
             backup "$HOME/.zshrc"
-            backup "$HOME/.zsh_plugins.txt"
+            backup "$CONF/zsh"
             ln -sf "$DOTS/zsh/.zshrc" "$HOME"
-            ln -sf "$DOTS/zsh/.zsh_plugins.txt" "$HOME"
+            ln -sf "$DOTS/zsh/zsh" "$CONF"
             echo "Installed Zsh"
             ;;
         *)
