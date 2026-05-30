@@ -15,6 +15,9 @@ calias() {
 #---[ Aliases ]------------------------------------------------------
 # Replacements
 calias "cat" "bat"
+calias "find" "fd"
+calias "grep" "rg"
+calias "cd" "z"
 calias "ls" "eza -a --icons=always"
 alias ll="ls -lAh"
 

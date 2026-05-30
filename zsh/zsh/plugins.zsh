@@ -132,3 +132,5 @@ if [[ -n ${zcompdump}(#qN.mh+24) ]]; then
 else
     autoload -Uz compinit && compinit -C -d "$zcompdump"
 fi
+
+unsetopt extendedglob
