@@ -1,11 +1,15 @@
 #---[ Installing Plugins ]-------------------------------------------
 plugins=(
+    "romkatv/zsh-defer"
+)
+
+deferred_plugins=(
     "zshzoo/magic-enter"
     "MichaelAquilina/zsh-you-should-use"
     "hlissner/zsh-autopair"
-    "zsh-users/zsh-autosuggestions"
     "zsh-users/zsh-history-substring-search"
     "zsh-users/zsh-completions"
+    "zsh-users/zsh-autosuggestions"
     "Aloxaf/fzf-tab"
     "zdharma-continuum/fast-syntax-highlighting"
 )
@@ -112,9 +116,8 @@ zplugin-update() {
     echo -e "\n✨ All plugins updated!"
 }
 
-
 #---[ Initialization ]-----------------------------------------------
-# Loading Plugins
+# Synchronous Loading
 local plugin
 for plugin in "${plugins[@]}"; do
     _zplugin_load "$plugin"
@@ -134,3 +137,14 @@ else
 fi
 
 unsetopt extendedglob
+
+# Asynchronous Loading 
+if type zsh-defer >/dev/null 2>&1; then
+    for plugin in "${deferred_plugins[@]}"; do
+        zsh-defer _zplugin_load "$plugin"
+    done
+else
+    for plugin in "${deferred_plugins[@]}"; do
+        _zplugin_load "$plugin"
+    done
+fi
