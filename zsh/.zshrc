@@ -1,9 +1,6 @@
 ZCONFDIR="$HOME/.config/zsh"
 ZSH_LOCAL="$ZCONFDIR/local.zsh"
 
-# Disable System Compinit
-compinit() {}
-
 #---[ Loading Config Files ]-----------------------------------------
 if [ -d "$ZCONFDIR" ]; then
     for config_file in "$ZCONFDIR"/*.zsh(-.); do
