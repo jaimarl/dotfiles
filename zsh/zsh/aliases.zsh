@@ -29,5 +29,5 @@ alias ..="cd .."
 alias -g G="| grep"
 
 # Zsh
-alias zreload="source ~/.zshrc"
+alias zreload="source ~/.zshrc && echo '🛠️ Config reloaded!'"
 alias zrephist="strings $HISTFILE > $HISTFILE"

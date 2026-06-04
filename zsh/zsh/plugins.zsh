@@ -5,7 +5,6 @@ plugins=(
 
 deferred_plugins=(
     "zshzoo/magic-enter"
-    "MichaelAquilina/zsh-you-should-use"
     "hlissner/zsh-autopair"
     "zsh-users/zsh-history-substring-search"
     "zsh-users/zsh-completions"
@@ -18,6 +17,9 @@ deferred_plugins=(
 #---[ Plugin Configuration ]-----------------------------------------
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='underline,fg=magenta'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='underline,fg=red'
+
 function magic-enter-cmd {
     if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
         echo " ls; echo ''; git status -s"
@@ -27,6 +29,7 @@ function magic-enter-cmd {
 }
 
 local target="{}"
+local fzf_opts=( ${(z)Z_FZF_WINDOW_OPTS} ${(z)Z_FZF_COLOR_OPTS} )
 local dynamic_file_preview="${Z_FZF_PREVIEW_FILE//$target/\$file}"
 local dynamic_dir_preview="${Z_FZF_PREVIEW_DIR//$target/\$word}"
 
@@ -36,9 +39,10 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-zstyle ':fzf-tab:complete:(cd|z):*' fzf-preview ${(Q)dynamic_dir_preview}
+zstyle ':fzf-tab:*' fzf-flags "${fzf_opts[@]}" --prompt="Cmd >  "
 
-zstyle ':fzf-tab:*' fzf-flags ${(z)Z_FZF_WINDOW_OPTS} ${(z)Z_FZF_COLOR_OPTS}
+zstyle ':fzf-tab:complete:(cd|z):*' fzf-flags "${fzf_opts[@]}" --prompt="Dir >  "
+zstyle ':fzf-tab:complete:(cd|z):*' fzf-preview ${(Q)dynamic_dir_preview}
 
 
 #---[ Plugin Loader ]------------------------------------------------
@@ -75,6 +79,8 @@ _zplugin_load() {
             echo "⚠️ WARNING: Could not find entry point for ${name}" >&2
         fi
     fi
+
+    unset plugin
 }
 
 _zplugin_cleanup() {

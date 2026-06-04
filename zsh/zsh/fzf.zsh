@@ -1,5 +1,5 @@
 #---[ Customization ]------------------------------------------------
-typeset -g Z_FZF_WINDOW_OPTS="--height 45% --layout=reverse --border=rounded --inline-info"
+typeset -g Z_FZF_WINDOW_OPTS="--ansi --height 45% --layout=reverse --border=rounded --inline-info"
 
 typeset -g Z_FZF_COLOR_OPTS="--color=bg+:#363A4F,bg:#24273A,spinner:#F4DBD6,hl:#ED8796 \
 --color=fg:#CAD3F5,header:#ED8796,info:#C6A0F6,pointer:#F4DBD6 \
@@ -13,8 +13,8 @@ typeset -g Z_FZF_DEFAULT_OPTS="$Z_FZF_WINDOW_OPTS $Z_FZF_COLOR_OPTS"
 #---[ Tools Selection ]--------------------------------------------------------
 # Search
 if (( $+commands[fd] )); then
-    typeset -g Z_FZF_CMD_FILE="fd --type f --hidden --exclude .git"
-    typeset -g Z_FZF_CMD_DIR="fd --type d --hidden --exclude .git"
+    typeset -g Z_FZF_CMD_FILE="fd --type f --hidden --exclude .git --color=always"
+    typeset -g Z_FZF_CMD_DIR="fd --type d --hidden --exclude .git --color=always"
 else
     typeset -g Z_FZF_CMD_FILE="find . -type f -path '*/\.git/*' -prune -o -print"
     typeset -g Z_FZF_CMD_DIR="find . -type d -path '*/\.git/*' -prune -o -print"

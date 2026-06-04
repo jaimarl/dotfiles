@@ -2,19 +2,27 @@ ZCONFDIR="$HOME/.config/zsh"
 ZSH_LOCAL="$ZCONFDIR/local.zsh"
 
 #---[ Loading Config Files ]-----------------------------------------
-if [ -d "$ZCONFDIR" ]; then
-    for config_file in "$ZCONFDIR"/*.zsh(-.); do
-        [[ "$(basename "$config_file")" == "local.zsh" ]] && continue
+[[ ! -f "$ZSH_LOCAL" ]] && cp "$ZSH_LOCAL.example" "$ZSH_LOCAL"
 
-        source "$config_file"
-    done
-    unset config_file
-fi
+local config_files=(
+    "options.zsh"
+    "functions.zsh"
+    "plugins.zsh"
+    "aliases.zsh"
+    "binds.zsh"
+    "fzf.zsh"
+    "local.zsh"
+)
 
-if [ ! -f "$ZSH_LOCAL" ]; then
-    cp "$ZCONFDIR/local.zsh.example" "$ZCONFDIR/local.zsh"
-fi
-source "$ZSH_LOCAL"
+for file in "${config_files[@]}"; do
+    if [[ -f "$ZCONFDIR/$file" ]]; then
+        if [[ "$file" == "binds.zsh" ]] && type zsh-defer >/dev/null 2>&1; then
+            zsh-defer source "$ZCONFDIR/$file"
+        else
+            source "$ZCONFDIR/$file"
+        fi
+    fi
+done
 
 
 #---[ Tools ]--------------------------------------------------------
@@ -32,3 +40,5 @@ for tool in "${tools[@]}"; do
         source "$cache_file"
     fi
 done
+
+unset tool
